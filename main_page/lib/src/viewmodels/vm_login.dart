@@ -9,7 +9,7 @@ class VMLogin extends BaseModel {
   late bool isActiveRegister;
   late int activeTenantId;
 
-  String defaultRegisterUrl = "https://ulkeralihan.com";
+  late String defaultRegisterUrl = "https://ulkeralihan.com";
 
   late int androidBuildNumber;
   late int iosBuildNumber;

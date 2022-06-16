@@ -17,3 +17,27 @@ class ViewIndicator extends StatelessWidget {
     );
   }
 }
+
+class LoginText extends StatelessWidget {
+  final String text;
+  final TextStyle style;
+  final TextAlign textAlign;
+  final int maxLines;
+
+  const LoginText(
+      {Key? key,
+      required this.text,
+      required this.style,
+      required this.textAlign,
+      required this.maxLines})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: style,
+        overflow: TextOverflow.ellipsis,
+        textAlign: textAlign,
+        maxLines: maxLines);
+  }
+}
