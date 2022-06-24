@@ -21,7 +21,8 @@ class TodosView extends StatelessWidget {
 
   ListView buildListView(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: false,
+        shrinkWrap: true,
+        itemCount: context.watch<TodosViewModel>().todosList.length,
         itemBuilder: (_, index) => buildListItem(context, index));
   }
 
