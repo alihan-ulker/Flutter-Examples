@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-Todos todosFromJson(String str) => Todos.fromJson(json.decode(str));
+List<Todos> todosFromJson(String str) =>
+    List<Todos>.from(json.decode(str).map((x) => Todos.fromJson(x)));
 
-String todosToJson(Todos data) => json.encode(data.toJson());
+String todosToJson(List<Todos> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Todos {
   Todos({

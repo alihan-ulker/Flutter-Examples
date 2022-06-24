@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_example/core/model/todos_model.dart';
 import 'package:flutter_mvvm_example/core/service/todos_api_service.dart';
 
 enum TodosState { IDLE, BUSY, ERROR }
 
 class TodosViewModel with ChangeNotifier {
   late TodosState _todosState;
-
-  late List<Todos> todosList;
+  late List todosList;
 
   TodosViewModel() {
     todosList = [];
     _todosState = TodosState.IDLE;
-    TodosApiService().fetchTodosList();
+    //TodosApiService().fetchTodosList();
     fetchTodos();
   }
 
@@ -22,11 +20,14 @@ class TodosViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<Todos>> fetchTodos() async {
+  Future fetchTodos() async {
     try {
       state = TodosState.BUSY;
-      //todosListValue değeri todosList e gelmiyor
+
       todosList = await TodosApiService().fetchTodosList();
+
+      //todosList = todosApiService.todosListValue;
+
       state = TodosState.IDLE;
       return todosList;
     } catch (e) {

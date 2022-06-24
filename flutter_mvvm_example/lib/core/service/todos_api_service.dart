@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-List todosListValue = [];
-
 class TodosApiService {
+  late List todosListValue = [];
+
   Future fetchTodosList() async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
@@ -18,15 +19,21 @@ class TodosApiService {
       var json = await response.stream.bytesToString();
       var valueMap = jsonDecode(json);
 
+      // ignore: prefer_typing_uninitialized_variables
       var todos, getTodos;
       for (todos in valueMap) {
         getTodos = todos["title"];
         todosListValue.add(getTodos);
       }
-      print(todosListValue);
-      //print(valueMap);
+      if (kDebugMode) {
+        print(todosListValue);
+      }
     } else {
-      print(response.reasonPhrase);
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
+
+    return todosListValue;
   }
 }

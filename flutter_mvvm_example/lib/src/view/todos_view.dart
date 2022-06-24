@@ -11,9 +11,9 @@ class TodosView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarStyle(),
-      body: context.read<TodosViewModel>().state == TodosState.BUSY
+      body: context.watch<TodosViewModel>().state == TodosState.BUSY
           ? buildLoadingWidget()
-          : context.read<TodosViewModel>().state == TodosState.ERROR
+          : context.watch<TodosViewModel>().state == TodosState.ERROR
               ? buildErrorWidget()
               : buildListView(context),
     );
@@ -21,14 +21,15 @@ class TodosView extends StatelessWidget {
 
   ListView buildListView(BuildContext context) {
     return ListView.builder(
+        shrinkWrap: false,
         itemBuilder: (_, index) => buildListItem(context, index));
   }
 
   Widget buildListItem(BuildContext context, index) {
-    final todos = context.read<TodosViewModel>().todosList;
+    final todos = context.watch<TodosViewModel>().todosList[index];
     return Card(
       child: ListTile(
-        title: Text(todos.toString()),
+        title: Text(todos),
       ),
     );
   }
