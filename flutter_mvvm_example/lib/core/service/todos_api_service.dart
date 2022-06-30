@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_mvvm_example/core/constant/app_constant.dart';
 import 'package:http/http.dart' as http;
 
 class TodosApiService {
@@ -8,8 +9,7 @@ class TodosApiService {
 
   Future fetchTodosList() async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'GET', Uri.parse('https://jsonplaceholder.typicode.com/todos'));
+    var request = http.Request('GET', Uri.parse(AppConstant.appUrl));
     request.body = '''''';
     request.headers.addAll(headers);
 
