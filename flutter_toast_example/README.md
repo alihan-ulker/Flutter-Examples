@@ -1,6 +1,6 @@
 # flutter_toast_example
 
-A new Flutter project.
+fluttertoast: ^8.0.9
 
 ## Getting Started
 
