@@ -10,4 +10,9 @@ class UIText {
 
   static String saveButton = "Save File";
   static String clearButton = "Clear Temporary Files";
+
+  static String clearCache = "Temporary files removed with success.";
+  static String clearCacheError = "Failed to clean temporary files";
+
+  static String logException = "Unsupported operation";
 }

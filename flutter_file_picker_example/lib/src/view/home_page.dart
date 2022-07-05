@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_picker_example/core/service/file_picker_service.dart';
 import 'package:flutter_file_picker_example/core/shared/ui_text.dart';
@@ -11,6 +12,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _multiPick = false;
+  bool pickFile = false;
+
+  bool _isLoading = false;
+  String? _fileName;
+  List<PlatformFile>? _paths;
+  bool _userAborted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,33 +33,46 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(18.0),
             child: Column(
               children: [
-                // const SizedBox(height: 16.0),
-                // TextFormField(
-                //   decoration:
-                //       const InputDecoration(labelText: "File Extension"),
-                // ),
-                // const SizedBox(height: 16.0),
-                // SwitchListTile.adaptive(
-                //   title: const Text("Pick Multiple Files"),
-                //   value: _multiPick,
-                //   onChanged: (value) {
-                //     setState(() => _multiPick = value);
-                //   },
-                // ),
+                const SizedBox(height: 16.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                  child: SwitchListTile.adaptive(
+                    title: const Text("Pick Multiple Files"),
+                    value: _multiPick,
+                    onChanged: (value) {
+                      setState(() => _multiPick = value);
+                    },
+                  ),
+                ),
                 const SizedBox(height: 16.0),
                 Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () => pickMultipleFileOpen(context),
+                      onPressed: () => _multiPick
+                          ? pickMultipleFileOpen(context)
+                          : pickFileOpen(),
                       child: Text(_multiPick
                           ? UIText.pickFilesButton
                           : UIText.pickFileButton),
                     ),
                     const SizedBox(height: 16.0),
-                    // ElevatedButton(
-                    //   onPressed: () {},
-                    //   child: Text(UIText.pickFolderButton),
-                    // ),
+                    ElevatedButton(
+                      onPressed: () {
+                        selectFolder();
+                      },
+                      child: Text(UIText.pickFolderButton),
+                    ),
+                    const SizedBox(height: 16.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        clearCachedFiles(context);
+                      },
+                      child: Text(UIText.clearButton),
+                    ),
+                    ListTile(
+                      title: Text(
+                          pickFile ? file.path.toString() : "File not picked"),
+                    ),
                   ],
                 )
               ],

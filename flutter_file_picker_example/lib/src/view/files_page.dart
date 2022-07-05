@@ -47,7 +47,6 @@ class _FilePageState extends State<FilePage> {
     final fileSize =
         mb >= 1 ? "${mb.toStringAsFixed(2)} MB" : "${kb.toStringAsFixed(2)} KB";
     final extension = file.extension ?? "none";
-    //final color = getColor(extension);
     return InkWell(
       onTap: () => widget.onOpenedFile(file),
       child: Container(
