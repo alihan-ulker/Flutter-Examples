@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_file_picker_example/core/shared/ui_text.dart';
+import 'package:flutter_file_picker_example/core/shared/ui_theme.dart';
+import 'package:flutter_file_picker_example/src/view/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: UIText.appTitle,
+      theme: mainTheme,
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
     );
   }
 }
