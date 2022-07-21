@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication_manager_example/core/auth_manager.dart';
 import 'package:flutter_authentication_manager_example/core/cache_manager.dart';
 import 'package:flutter_authentication_manager_example/src/home/home_view.dart';
-import 'package:flutter_authentication_manager_example/src/home/model/user_model.dart';
+import 'package:flutter_authentication_manager_example/core/model/user_model.dart';
 import 'package:flutter_authentication_manager_example/src/login/login.dart';
 import 'package:flutter_authentication_manager_example/src/login/model/login_request_model.dart';
 import 'package:flutter_authentication_manager_example/src/login/service/login_service.dart';

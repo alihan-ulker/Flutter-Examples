@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication_manager_example/core/auth_manager.dart';
 import 'package:flutter_authentication_manager_example/core/shared/ui_text.dart';
-import 'package:flutter_authentication_manager_example/src/login/login.dart';
+import 'package:flutter_authentication_manager_example/src/splash/splash_view.dart';
 import 'package:provider/provider.dart';
 
 //"email": "eve.holt@reqres.in",
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Login(),
+      home: const SplashView(),
     );
   }
 }

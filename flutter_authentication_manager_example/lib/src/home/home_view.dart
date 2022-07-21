@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication_manager_example/core/auth_manager.dart';
 import 'package:flutter_authentication_manager_example/core/cache_manager.dart';
-import 'package:flutter_authentication_manager_example/src/home/model/user_model.dart';
+import 'package:flutter_authentication_manager_example/core/model/user_model.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomeViewState extends State<HomeView> with CacheManager {
 
   late UserModel? userModel;
 
-  Future<void> getTokenCAche() async {
+  Future<void> getTokenCache() async {
     token = await getToken() ?? '';
     setState(() {});
   }
