@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_authentication_manager_example/core/auth_manager.dart';
 import 'package:flutter_authentication_manager_example/core/shared/ui_text.dart';
-import 'package:flutter_authentication_manager_example/src/login/login_view.dart';
+import 'package:flutter_authentication_manager_example/src/login/login.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MultiProvider(
+      providers: [
+        Provider<AuthenticationManager>(
+          create: (context) => AuthenticationManager(context: context),
+        )
+      ],
+      child: const MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -17,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginView(),
+      home: const Login(),
     );
   }
 }
