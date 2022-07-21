@@ -26,7 +26,7 @@ abstract class LoginViewModel extends State<Login> with CacheManager {
     final response = await loginService
         .fetchLogin(LoginRequestModel(email: email, password: password));
 
-    print(response);
+    //print(response);
 
     if (response != null) {
       saveToken(response.token ?? '');
