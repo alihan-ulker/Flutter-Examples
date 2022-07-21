@@ -4,6 +4,10 @@ import 'package:flutter_authentication_manager_example/core/shared/ui_text.dart'
 import 'package:flutter_authentication_manager_example/src/login/login.dart';
 import 'package:provider/provider.dart';
 
+//"email": "eve.holt@reqres.in",
+//"password": "pistol",
+//"url":"https://reqres.in/api/login"
+
 void main() => runApp(MultiProvider(
       providers: [
         Provider<AuthenticationManager>(
