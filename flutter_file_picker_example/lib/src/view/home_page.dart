@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_picker_example/core/service/file_picker_service.dart';
 import 'package:flutter_file_picker_example/core/shared/ui_text.dart';
@@ -10,14 +9,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+late String fileNot;
+
 class _HomePageState extends State<HomePage> {
   bool _multiPick = false;
   bool pickFile = false;
-
-  bool _isLoading = false;
-  String? _fileName;
-  List<PlatformFile>? _paths;
-  bool _userAborted = false;
+  @override
+  void initState() {
+    super.initState();
+    //getFolderPath();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +56,13 @@ class _HomePageState extends State<HomePage> {
                           ? UIText.pickFilesButton
                           : UIText.pickFileButton),
                     ),
-                    const SizedBox(height: 16.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        selectFolder();
-                      },
-                      child: Text(UIText.pickFolderButton),
-                    ),
+                    // const SizedBox(height: 16.0),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     selectFolder();
+                    //   },
+                    //   child: Text(UIText.pickFolderButton),
+                    // ),
                     const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: () {
@@ -69,12 +70,14 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Text(UIText.clearButton),
                     ),
-                    ListTile(
-                      title: Text(
-                          pickFile ? file.path.toString() : "File not picked"),
-                    ),
+                    //getFolderPath(),
                   ],
-                )
+                ),
+                //getFolderPath(),
+                // ListTile(
+                //   //title: Text(fileNot),
+                //   title: Text(pickFile ? directoryPath : fileNot),
+                // ),
               ],
             ),
           ),
@@ -82,4 +85,20 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  // getFolderPath() {
+  //   if (pickFile == true) {
+  //     setState(() {
+  //       fileNot = directoryPath;
+  //     });
+  //     setState(() {
+  //       fileNot = "File not picked";
+  //     });
+  //   } else {
+  //     setState(() {
+  //       fileNot = "File not picked";
+  //     });
+  //   }
+  //   return Text(fileNot);
+  // }
 }

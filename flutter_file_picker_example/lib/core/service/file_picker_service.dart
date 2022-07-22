@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -15,9 +17,6 @@ late String directoryPath;
 bool userAborted = false;
 late PlatformFile file;
 bool pickFile = false;
-List<PlatformFile>? _paths;
-String? _directoryPath;
-String? _extension;
 
 //single file open
 pickFileOpen() async {
@@ -106,14 +105,14 @@ void selectFolder() async {
     String? path = await FilePicker.platform.getDirectoryPath();
 
     directoryPath = path!;
-    userAborted = path == null;
+    //userAborted = path == null;
   } on PlatformException catch (e) {
     _logException("${UIText.logException}$e");
   } catch (e) {
     _logException(e.toString());
   } finally {
-    isLoading = false;
-    pickFile = true;
+    // isLoading = false;
+    // pickFile = true;
   }
 }
 
