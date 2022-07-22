@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                   child: Text('Birşeyler ters gitti!'),
                 ),
               )),
-      home: const ViewLogin(),
+      home: ViewLogin(),
     );
   }
 }

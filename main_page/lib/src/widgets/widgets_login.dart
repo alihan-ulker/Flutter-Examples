@@ -6,12 +6,18 @@ class LoginHeaderNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      alignment: Alignment.center,
-      child: Image.asset(UIPath.logo),
+    return Padding(
+      padding: const EdgeInsets.only(left: 60.0, right: 60.0, top: 10.0),
+      child: Container(
+        width: 160.0,
+        height: 200.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(UIPath.logo),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+      ),
     );
-    //SizedBox(child: Image.asset(UIPath.logo));
   }
 }
