@@ -33,6 +33,20 @@ class ViewTestThird extends StatelessWidget {
               },
               child: Text(UIText.testsBackButton),
             ),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                AppUtils.startPush(context, route: Routes.testPage);
+              },
+              child: Text(UIText.testButton),
+            ),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                AppUtils.startPush(context, route: Routes.testPage2);
+              },
+              child: Text(UIText.test2Button),
+            ),
           ],
         ));
   }
