@@ -17,12 +17,12 @@ class _ToDoViewState extends State<ToDoView> {
   final _controller = TextEditingController();
   final _todoBox = Hive.box(todoBox);
   final _todosList = [
-    ToDo(description: UIText.duty, finished: false),
-    ToDo(description: UIText.duty2, finished: false),
-    ToDo(description: UIText.duty3, finished: false),
-    ToDo(description: UIText.duty4, finished: false),
-    ToDo(description: UIText.duty5, finished: false),
-    ToDo(description: UIText.duty6, finished: false),
+    ToDo(description: UIText.task, finished: false),
+    ToDo(description: UIText.task2, finished: false),
+    ToDo(description: UIText.task3, finished: false),
+    ToDo(description: UIText.task4, finished: false),
+    ToDo(description: UIText.task5, finished: false),
+    ToDo(description: UIText.task6, finished: false),
   ];
 
   @override
