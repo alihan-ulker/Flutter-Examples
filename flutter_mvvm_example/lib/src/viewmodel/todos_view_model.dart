@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_example/core/service/todos_api_service.dart';
 
@@ -10,7 +12,6 @@ class TodosViewModel with ChangeNotifier {
   TodosViewModel() {
     todosList = [];
     _todosState = TodosState.IDLE;
-    //TodosApiService().fetchTodosList();
     fetchTodos();
   }
 
@@ -25,8 +26,6 @@ class TodosViewModel with ChangeNotifier {
       state = TodosState.BUSY;
 
       todosList = await TodosApiService().fetchTodosList();
-
-      //todosList = todosApiService.todosListValue;
 
       state = TodosState.IDLE;
       return todosList;

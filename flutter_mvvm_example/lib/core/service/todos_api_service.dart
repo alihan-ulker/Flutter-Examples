@@ -26,7 +26,7 @@ class TodosApiService {
         todosListValue.add(getTodos);
       }
       if (kDebugMode) {
-        print(todosListValue);
+        print("Todos List: $todosListValue");
       }
     } else {
       if (kDebugMode) {

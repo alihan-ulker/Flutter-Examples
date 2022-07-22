@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_example/core/shared/ui_text.dart';
 import 'package:flutter_mvvm_example/src/view/todos_view.dart';
 import 'package:flutter_mvvm_example/src/viewmodel/todos_view_model.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TodosViewModel>.value(value: TodosViewModel()),
       ],
       child: MaterialApp(
-        title: 'Flutter MVVM Example',
+        title: UIText.title,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
