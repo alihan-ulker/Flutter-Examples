@@ -20,6 +20,7 @@ class ViewHome extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {
@@ -33,6 +34,13 @@ class ViewHome extends StatelessWidget {
                     AppUtils.startPush(context, route: Routes.testPage2);
                   },
                   child: Text(UIText.buttonTest2),
+                ),
+                const SizedBox(width: 10.0),
+                ElevatedButton(
+                  onPressed: () {
+                    AppUtils.startPush(context, route: Routes.testPage3);
+                  },
+                  child: Text(UIText.buttonTest3),
                 ),
               ],
             ),
