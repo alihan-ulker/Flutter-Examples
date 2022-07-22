@@ -17,12 +17,12 @@ class _ToDoViewState extends State<ToDoView> {
   final _controller = TextEditingController();
   final _todoBox = Hive.box(todoBox);
   final _todosList = [
-    ToDo(description: "Deneme", finished: false),
-    ToDo(description: "Deneme2", finished: false),
-    ToDo(description: "Deneme3", finished: false),
-    ToDo(description: "Deneme4", finished: false),
-    ToDo(description: "Deneme5", finished: false),
-    ToDo(description: "Deneme6", finished: false),
+    ToDo(description: UIText.duty, finished: false),
+    ToDo(description: UIText.duty2, finished: false),
+    ToDo(description: UIText.duty3, finished: false),
+    ToDo(description: UIText.duty4, finished: false),
+    ToDo(description: UIText.duty5, finished: false),
+    ToDo(description: UIText.duty6, finished: false),
   ];
 
   @override
@@ -30,7 +30,7 @@ class _ToDoViewState extends State<ToDoView> {
     super.initState();
     for (var t in _todoBox.values) {
       if (kDebugMode) {
-        print(t.finished);
+        print("t: ${t.finished}");
       }
     }
     if (_todoBox.length == 0) _todoBox.addAll(_todosList);
@@ -48,7 +48,7 @@ class _ToDoViewState extends State<ToDoView> {
           children: [
             TextField(
               controller: _controller,
-              decoration: const InputDecoration(hintText: "Yeni Görev Ekle"),
+              decoration: InputDecoration(hintText: UIText.hintText),
               onSubmitted: (sub) {
                 _todoBox.add(ToDo(description: sub, finished: false));
               },
