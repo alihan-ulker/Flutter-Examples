@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:main_page/core/shared/ui_path.dart';
 
-class LoginHeaderNew extends StatelessWidget {
-  const LoginHeaderNew({Key? key}) : super(key: key);
+class LoginHeader extends StatelessWidget {
+  const LoginHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

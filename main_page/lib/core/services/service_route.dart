@@ -14,7 +14,7 @@ class RouteService {
 
   //route handler
   static final Handler _handlerLogin =
-      Handler(handlerFunc: (context, parameters) => ViewLogin());
+      Handler(handlerFunc: (context, parameters) => const ViewLogin());
   static final Handler _handlerHome =
       Handler(handlerFunc: (context, parameters) => const ViewHome());
 

@@ -51,8 +51,7 @@ class _ViewLoginState extends State<ViewLogin> {
               child: Form(
                 key: _formKey,
                 child: Container(
-                  //color: Colors.grey[200],
-                  margin: const EdgeInsets.symmetric(horizontal: 50),
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: NotificationListener<OverscrollIndicatorNotification>(
                     onNotification: (overscroll) {
                       bool result = false;
@@ -61,14 +60,8 @@ class _ViewLoginState extends State<ViewLogin> {
                     },
                     child: SingleChildScrollView(
                       child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // !vm.isActiveTentant
-                          //     ? Container(
-                          //         margin: const EdgeInsets.only(top: 20.0),
-                          //       )
-                          //     :
                           Container(
                             height: 60.0,
                             margin: const EdgeInsets.only(top: 20.0),
@@ -92,7 +85,8 @@ class _ViewLoginState extends State<ViewLogin> {
                               }).toList(),
                             ),
                           ),
-                          const LoginHeaderNew(),
+                          //Login Logo
+                          const LoginHeader(),
                           const SizedBox(height: 20),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -116,15 +110,15 @@ class _ViewLoginState extends State<ViewLogin> {
                               const SizedBox(height: 8.0),
                               TextFormField(
                                 autocorrect: true,
-                                decoration: const InputDecoration(
-                                  hintText: "Kullanıcı Adı",
+                                decoration: InputDecoration(
+                                  hintText: UIText.email,
                                   prefixIcon:
-                                      Icon(Icons.supervised_user_circle),
-                                  errorStyle: TextStyle(fontSize: 14.0),
+                                      const Icon(Icons.supervised_user_circle),
+                                  errorStyle: const TextStyle(fontSize: 14.0),
                                 ),
                                 validator: (inputValue) {
                                   if (inputValue!.isEmpty) {
-                                    return "Kullanıcı Adı boş bırakılamaz!";
+                                    return UIText.emailError;
                                   }
                                   return null;
                                 },
@@ -136,7 +130,7 @@ class _ViewLoginState extends State<ViewLogin> {
                                 obscureText: _isObscure,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(Icons.lock),
-                                  hintText: "Şifre",
+                                  hintText: UIText.password,
                                   errorStyle: const TextStyle(fontSize: 14.0),
                                   suffix: IconButton(
                                     onPressed: () {
@@ -153,9 +147,9 @@ class _ViewLoginState extends State<ViewLogin> {
                                 ),
                                 validator: (inputValue) {
                                   if (inputValue!.isEmpty) {
-                                    return "Şifre boş bırakılamaz!";
+                                    return UIText.passwordError;
                                   } else if (inputValue.trim().length < 6) {
-                                    return "Şifre 6 karakterdan az olamaz";
+                                    return UIText.passwordWarning;
                                   }
                                   return null;
                                 },
@@ -165,8 +159,8 @@ class _ViewLoginState extends State<ViewLogin> {
                               TextButton(
                                 onPressed: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Şifremi Unuttum"),
+                                    SnackBar(
+                                      content: Text(UIText.passwordForget),
                                     ),
                                   );
                                 },
@@ -174,7 +168,7 @@ class _ViewLoginState extends State<ViewLogin> {
                                     child: Row(
                                   children: [
                                     Text(
-                                      "Şifremi hatırlamıyorum.",
+                                      UIText.passwordRemember,
                                       style: TextStyle(
                                         color: Colors.green[700],
                                         decoration: TextDecoration.underline,
@@ -199,7 +193,7 @@ class _ViewLoginState extends State<ViewLogin> {
                                             color: Colors.white,
                                             strokeWidth: 1.5,
                                           ))
-                                      : const Text('Giriş Yap'),
+                                      : Text(UIText.buttonLogin),
                                 ),
                               ),
                             ],
