@@ -11,7 +11,7 @@ class UIText {
   static String loginNotice =
       'Lütfen size gönderilen kullanıcı adı ve şifreniz ile giriş yapınız.';
 
-  static String email = "Email ya da kullanıcı adı";
+  static String email = "Email/Kullanıcı adı";
   static String emailError = "Kullanıcı Adı boş bırakılamaz!";
 
   static String password = "Şifre";

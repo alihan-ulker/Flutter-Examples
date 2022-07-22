@@ -34,15 +34,18 @@ class _ViewLoginState extends State<ViewLogin> {
   }
 
   final _formKey = GlobalKey<FormState>();
-
   bool _isObscure = true;
-
   bool isLoading = false;
-
   String? userNameOrEmailAddress, password;
+  String dropdownValue = 'Tenant One';
+  List<String> itemsList = [
+    "Tenant One",
+    "Tenant Two",
+    "Tenant Tree",
+    "Tenant Four"
+  ];
 
   Widget body(BuildContext context, {required VMLogin vm}) {
-    String dropdownValue = 'One';
     return Scaffold(
       backgroundColor: UIColor.white,
       body: vm.busy
@@ -72,12 +75,8 @@ class _ViewLoginState extends State<ViewLogin> {
                                   dropdownValue = newValue!;
                                 });
                               },
-                              items: <String>[
-                                'One',
-                                'Two',
-                                'Tree',
-                                'Four'
-                              ].map<DropdownMenuItem<String>>((String value) {
+                              items: itemsList.map<DropdownMenuItem<String>>(
+                                  (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -214,7 +213,7 @@ class _ViewLoginState extends State<ViewLogin> {
       isLoading = true;
     });
     login();
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       isLoading = false;
