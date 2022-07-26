@@ -15,6 +15,7 @@ class LoginView extends LoginViewModel {
     return Scaffold(
       appBar: AppBar(
         title: Text(UIText.appTitle),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: paddingLow,
