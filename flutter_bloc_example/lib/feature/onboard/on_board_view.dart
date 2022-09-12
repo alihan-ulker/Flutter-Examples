@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc_example/core/padding/page_padding.dart';
 import 'package:flutter_bloc_example/core/shared/ui_text.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_model.dart';
+import 'package:flutter_bloc_example/feature/onboard/widget/onboard_card.dart';
+
+//Kullaniciya gosterilen kaydirmali sayfanin ayarlari
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({super.key});
@@ -27,6 +31,7 @@ class _OnBoardViewState extends State<OnBoardView>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        //koyu sistem appbar i icin
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
           TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
@@ -39,36 +44,41 @@ class _OnBoardViewState extends State<OnBoardView>
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              itemCount: OnBoardModels.onBoardItems.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    const Text(UIText.orderTitle),
-                    const Text(UIText.orderSubtitle),
-                    Image.asset("assets/images/ic_chef.png"),
-                  ],
-                );
-              },
+      body: Padding(
+        padding: const PagePadding.all(),
+        child: Column(
+          children: [
+            Expanded(
+              child: _pageViewItems(),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TabPageSelector(
-                controller: _tabController,
-              ),
-              FloatingActionButton(
-                onPressed: () {},
-                child: const Text(UIText.nextButton),
-              ),
-            ],
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TabPageSelector(
+                  controller: _tabController,
+                ),
+                _nextButton(),
+              ],
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  PageView _pageViewItems() {
+    return PageView.builder(
+      itemCount: OnBoardModels.onBoardItems.length,
+      itemBuilder: (context, index) {
+        return OnboardCard(model: OnBoardModels.onBoardItems[index]);
+      },
+    );
+  }
+
+  FloatingActionButton _nextButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+      child: const Text(UIText.nextButton),
     );
   }
 }

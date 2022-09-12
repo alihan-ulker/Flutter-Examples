@@ -1,5 +1,8 @@
 import 'package:flutter_bloc_example/core/shared/ui_text.dart';
 
+//on board sayfasinda ki gorseller icin tek tek
+//image adresi ve tanimlamalar yapmamak icin
+
 class OnBoardModel {
   final String title;
   final String description;

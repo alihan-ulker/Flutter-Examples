@@ -1,3 +1,5 @@
+//Uygulama icindeki tum yazilari tek bir yerden duzenleyebilmek icin
+
 class UIText {
   static const String skipTitle = "Skip";
   static const String orderTitle = "Order Your Food";
