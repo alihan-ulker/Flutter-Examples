@@ -17,12 +17,35 @@ class OnBoardView extends StatefulWidget {
 class _OnBoardViewState extends State<OnBoardView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _tabController =
         TabController(length: OnBoardModels.onBoardItems.length, vsync: this);
+  }
+
+//next e basinca tetiklenen FloatingActionButton ile sayfanin sol altındaki
+//TabPageSelector degismesi icin gerekli fonksiyonlar
+
+  void incrementAndChange() {
+    if (_selectedIndex == OnBoardModels.onBoardItems.length - 1) {
+      return;
+    }
+
+    incrementSelectedPage();
+    _changeIndicator(_selectedIndex);
+  }
+
+  void incrementSelectedPage() {
+    setState(() {
+      _selectedIndex++;
+    });
+  }
+
+  void _changeIndicator(int value) {
+    _tabController.animateTo(value);
   }
 
   @override
@@ -77,7 +100,9 @@ class _OnBoardViewState extends State<OnBoardView>
 
   FloatingActionButton _nextButton() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        incrementAndChange();
+      },
       child: const Text(UIText.nextButton),
     );
   }
