@@ -4,6 +4,7 @@ import 'package:flutter_bloc_example/core/padding/page_padding.dart';
 import 'package:flutter_bloc_example/core/shared/ui_text.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_model.dart';
 import 'package:flutter_bloc_example/feature/onboard/widget/onboard_card.dart';
+import 'package:flutter_bloc_example/feature/onboard/widget/tab_indicator.dart';
 
 //Kullaniciya gosterilen kaydirmali sayfanin ayarlari
 
@@ -14,28 +15,23 @@ class OnBoardView extends StatefulWidget {
   State<OnBoardView> createState() => _OnBoardViewState();
 }
 
-class _OnBoardViewState extends State<OnBoardView>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _OnBoardViewState extends State<OnBoardView> {
   int _selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController =
-        TabController(length: OnBoardModels.onBoardItems.length, vsync: this);
-  }
+//sayfa sayisini secili sayfa icin kontrol etme
+//_selectedIndex OnBoardModels.onBoardItems.length - 1 esit ise son
+  bool get _isLastPage =>
+      OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
 
 //next e basinca tetiklenen FloatingActionButton ile sayfanin sol altındaki
 //TabPageSelector degismesi icin gerekli fonksiyonlar
 
   void incrementAndChange() {
-    if (_selectedIndex == OnBoardModels.onBoardItems.length - 1) {
+    if (_isLastPage) {
       return;
     }
 
     incrementSelectedPage();
-    _changeIndicator(_selectedIndex);
   }
 
   void incrementSelectedPage() {
@@ -44,29 +40,10 @@ class _OnBoardViewState extends State<OnBoardView>
     });
   }
 
-  void _changeIndicator(int value) {
-    _tabController.animateTo(value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        //koyu sistem appbar i icin
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        actions: [
-          TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
-        ],
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.chevron_left_outlined,
-            color: Colors.grey,
-          ),
-        ),
-      ),
+      appBar: _appBar(),
       body: Padding(
         padding: const PagePadding.all(),
         child: Column(
@@ -77,13 +54,32 @@ class _OnBoardViewState extends State<OnBoardView>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TabPageSelector(
-                  controller: _tabController,
+                TabIndicator(
+                  selectedIndex: _selectedIndex,
                 ),
                 _nextButton(),
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      //koyu sistem appbar i icin
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      actions: [
+        TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
+      ],
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.chevron_left_outlined,
+          color: Colors.grey,
         ),
       ),
     );
