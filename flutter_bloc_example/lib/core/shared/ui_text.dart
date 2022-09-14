@@ -6,4 +6,5 @@ class UIText {
   static const String orderSubtitle =
       "Now you can order food any time right from your mobile.";
   static const String nextButton = "Next";
+  static const String start = "Start";
 }

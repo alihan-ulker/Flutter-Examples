@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc_example/core/padding/page_padding.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_bloc_example/core/shared/ui_text.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_model.dart';
 import 'package:flutter_bloc_example/feature/onboard/widget/onboard_card.dart';
 import 'package:flutter_bloc_example/feature/onboard/widget/tab_indicator.dart';
+
+part './module/start_fab_button.dart';
 
 //Kullaniciya gosterilen kaydirmali sayfanin ayarlari
 
@@ -19,24 +23,30 @@ class _OnBoardViewState extends State<OnBoardView> {
   int _selectedIndex = 0;
 
 //sayfa sayisini secili sayfa icin kontrol etme
-//_selectedIndex OnBoardModels.onBoardItems.length - 1 esit ise son
+//_selectedIndex OnBoardModels.onBoardItems.length - 1 esit ise son sayfa
   bool get _isLastPage =>
       OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
+
+//_selectedIndex 0 a esitse ilk sayfa
+  bool get _isFirstPage => _selectedIndex == 0;
 
 //next e basinca tetiklenen FloatingActionButton ile sayfanin sol altındaki
 //TabPageSelector degismesi icin gerekli fonksiyonlar
 
-  void incrementAndChange() {
-    if (_isLastPage) {
+  void _incrementAndChange([int? value]) {
+    if (_isLastPage && value == null) {
       return;
     }
 
-    incrementSelectedPage();
+    _incrementSelectedPage(value);
   }
 
-  void incrementSelectedPage() {
+//eger value degeri gelirse veriyi set et
+  void _incrementSelectedPage([int? value]) {
+    //inspect(this) ile tum sayfada olan degisiklikler loglanir.
+    inspect(this);
     setState(() {
-      _selectedIndex++;
+      _selectedIndex = value ?? _selectedIndex++;
     });
   }
 
@@ -57,7 +67,12 @@ class _OnBoardViewState extends State<OnBoardView> {
                 TabIndicator(
                   selectedIndex: _selectedIndex,
                 ),
-                _nextButton(),
+                _StartFabButton(
+                  isLastPage: _isLastPage,
+                  onPressed: () {
+                    _incrementAndChange();
+                  },
+                )
               ],
             ),
           ],
@@ -75,18 +90,23 @@ class _OnBoardViewState extends State<OnBoardView> {
       actions: [
         TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
       ],
-      leading: IconButton(
-        onPressed: () {},
-        icon: const Icon(
-          Icons.chevron_left_outlined,
-          color: Colors.grey,
-        ),
-      ),
+      leading: _isFirstPage
+          ? null
+          : IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.chevron_left_outlined,
+                color: Colors.grey,
+              ),
+            ),
     );
   }
 
   PageView _pageViewItems() {
     return PageView.builder(
+      onPageChanged: (value) {
+        _incrementAndChange(value);
+      },
       itemCount: OnBoardModels.onBoardItems.length,
       itemBuilder: (context, index) {
         return OnboardCard(model: OnBoardModels.onBoardItems[index]);
@@ -94,12 +114,12 @@ class _OnBoardViewState extends State<OnBoardView> {
     );
   }
 
-  FloatingActionButton _nextButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        incrementAndChange();
-      },
-      child: const Text(UIText.nextButton),
-    );
-  }
+  // FloatingActionButton _nextButton() {
+  //   return FloatingActionButton(
+  //     onPressed: () {
+  //       _incrementAndChange();
+  //     },
+  //     child: Text(_isLastPage ? UIText.start : UIText.nextButton),
+  //   );
+  // }
 }
