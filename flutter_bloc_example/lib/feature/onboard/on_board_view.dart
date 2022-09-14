@@ -30,15 +30,27 @@ class _OnBoardViewState extends State<OnBoardView> {
 //_selectedIndex 0 a esitse ilk sayfa
   bool get _isFirstPage => _selectedIndex == 0;
 
+  // ---xx
+  ValueNotifier<bool> isBackEnable = ValueNotifier(false);
+  // --xx
+
 //next e basinca tetiklenen FloatingActionButton ile sayfanin sol altındaki
 //TabPageSelector degismesi icin gerekli fonksiyonlar
 
   void _incrementAndChange([int? value]) {
     if (_isLastPage && value == null) {
+      _changeBackEnable(true);
       return;
     }
-
+    _changeBackEnable(false);
     _incrementSelectedPage(value);
+  }
+
+  void _changeBackEnable(bool value) {
+    if (value == isBackEnable.value) {
+      return;
+    }
+    isBackEnable.value = value;
   }
 
 //eger value degeri gelirse veriyi set et
@@ -46,7 +58,11 @@ class _OnBoardViewState extends State<OnBoardView> {
     //inspect(this) ile tum sayfada olan degisiklikler loglanir.
     inspect(this);
     setState(() {
-      _selectedIndex = value ?? _selectedIndex++;
+      if (value != null) {
+        _selectedIndex = value;
+      } else {
+        _selectedIndex++;
+      }
     });
   }
 
@@ -88,7 +104,15 @@ class _OnBoardViewState extends State<OnBoardView> {
       //koyu sistem appbar i icin
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       actions: [
-        TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
+        ValueListenableBuilder<bool>(
+            valueListenable: isBackEnable,
+            builder: (BuildContext context, bool value, Widget? child) {
+              return value
+                  ? const SizedBox()
+                  : TextButton(
+                      onPressed: () {}, child: const Text(UIText.skipTitle));
+            }),
+        //TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
       ],
       leading: _isFirstPage
           ? null
