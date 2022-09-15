@@ -2,11 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc_example/core/models/project_context_model.dart';
+import 'package:flutter_bloc_example/core/models/user_context_model.dart';
 import 'package:flutter_bloc_example/core/padding/page_padding.dart';
 import 'package:flutter_bloc_example/core/shared/ui_text.dart';
+import 'package:flutter_bloc_example/feature/login/view/login_view.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_model.dart';
 import 'package:flutter_bloc_example/feature/onboard/widget/onboard_card.dart';
 import 'package:flutter_bloc_example/feature/onboard/widget/tab_indicator.dart';
+import 'package:kartal/kartal.dart';
+import 'package:provider/provider.dart';
 
 part './module/start_fab_button.dart';
 
@@ -69,7 +74,7 @@ class _OnBoardViewState extends State<OnBoardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      appBar: _appBar(context),
       body: Padding(
         padding: const PagePadding.all(),
         child: Column(
@@ -97,10 +102,11 @@ class _OnBoardViewState extends State<OnBoardView> {
     );
   }
 
-  AppBar _appBar() {
+  AppBar _appBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      title: Center(child: Text(context.watch<ProductContext>().newUserName)),
       //koyu sistem appbar i icin
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       actions: [
@@ -110,7 +116,11 @@ class _OnBoardViewState extends State<OnBoardView> {
               return value
                   ? const SizedBox()
                   : TextButton(
-                      onPressed: () {}, child: const Text(UIText.skipTitle));
+                      onPressed: () {
+                        context.read<ProductContext>().changeName("Ali");
+                        context.navigateToPage(const LoginView());
+                      },
+                      child: const Text(UIText.skipTitle));
             }),
         //TextButton(onPressed: () {}, child: const Text(UIText.skipTitle)),
       ],

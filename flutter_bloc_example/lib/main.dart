@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (context) => UserContext("a")),
+        //Provider(create: (context) => UserContext("a")),
+        ProxyProvider<ProductContext, UserContext?>(
+            update: (context, productContext, userContext) {
+          return userContext != null
+              ? userContext.copyWith(name: productContext.newUserName)
+              : UserContext(productContext.newUserName);
+        }),
         ChangeNotifierProvider(create: (context) => ProductContext()),
       ],
       child: MaterialApp(
