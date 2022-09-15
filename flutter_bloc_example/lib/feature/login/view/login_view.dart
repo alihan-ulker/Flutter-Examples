@@ -5,6 +5,7 @@ import 'package:flutter_bloc_example/core/shared/ui_text.dart';
 import 'package:flutter_bloc_example/core/utility/input_decorations.dart';
 import 'package:flutter_bloc_example/feature/login/viewModel/login_view_model.dart';
 import 'package:kartal/kartal.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -23,8 +24,19 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: _loginViewModel,
+      builder: (context, child) {
+        return _bodyView(context);
+      },
+    );
+  }
+
+  Scaffold _bodyView(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: _loadingWidget(),
+      ),
       body: Padding(
         padding: const PagePadding.allLow(),
         child: Column(
@@ -44,16 +56,42 @@ class _LoginViewState extends State<LoginView> {
               decoration: ProjectInputs(UIText.name),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: context.watch<LoginViewModel>().isLoading
+                  ? null
+                  : () {
+                      context.read<LoginViewModel>().controlTextValue();
+                    },
               child: const Center(child: Text(UIText.login)),
             ),
             CheckboxListTile(
-                value: true,
+                //provider ile checkBox verisi
+                value: context.watch<LoginViewModel>().isCheckBoxOk,
                 title: const Text(UIText.checkBox),
-                onChanged: (value) {}),
+                onChanged: (value) {
+                  context.read<LoginViewModel>().checkBoxChange(value ?? false);
+                }),
           ],
         ),
       ),
     );
+  }
+
+  Widget _loadingWidget() {
+    return Selector<LoginViewModel, bool>(
+      selector: (context, viewModel) {
+        return viewModel.isLoading;
+      },
+      builder: (context, value, child) {
+        return value
+            ? const Center(child: CircularProgressIndicator())
+            : const SizedBox();
+      },
+    );
+
+    // return Consumer<LoginViewModel>(builder: (context, value, child) {
+    //   return value.isLoading
+    //       ? const Center(child: CircularProgressIndicator())
+    //       : const SizedBox();
+    // });
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//login ekraninda ki kapi resmi icin
+//fotografin yolunu enum a atarak kullandik
 enum ImageEnums { door }
 
 extension ImageEnumsExtension on ImageEnums {
