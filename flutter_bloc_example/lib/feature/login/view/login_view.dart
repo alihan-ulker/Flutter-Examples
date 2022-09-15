@@ -76,6 +76,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+//CircularProgressIndicator kontrol
   Widget _loadingWidget() {
     return Selector<LoginViewModel, bool>(
       selector: (context, viewModel) {
