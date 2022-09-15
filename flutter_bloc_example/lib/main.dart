@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //Provider(create: (context) => UserContext("a")),
+        //kullaici isminde guncelleme yapabilmek icin ProxyProvider in update ozelligi kullanildi
         ProxyProvider<ProductContext, UserContext?>(
             update: (context, productContext, userContext) {
           return userContext != null
