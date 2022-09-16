@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc_example/core/models/project_context_model.dart';
 import 'package:flutter_bloc_example/core/models/user_context_model.dart';
-import 'package:flutter_bloc_example/feature/login/view/login_view.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_view.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_bloc_example/feature/onboard/on_board_view.dart';
