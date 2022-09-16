@@ -4,7 +4,6 @@ import 'package:flutter_bloc_example/core/models/project_context_model.dart';
 import 'package:flutter_bloc_example/core/models/user_context_model.dart';
 import 'package:flutter_bloc_example/feature/onboard/on_board_view.dart';
 import 'package:provider/provider.dart';
-//import 'package:flutter_bloc_example/feature/onboard/on_board_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
             floatingActionButtonTheme: const FloatingActionButtonThemeData(
                 backgroundColor: Color.fromRGBO(11, 23, 84, 1))),
         home: const OnBoardView(),
-        //home: const LoginView(),
       ),
     );
   }
