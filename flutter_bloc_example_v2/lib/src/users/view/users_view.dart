@@ -21,14 +21,22 @@ class UsersView extends StatelessWidget {
       child: BlocConsumer<UsersCubit, UsersState>(
         listener: (context, state) {
           if (state is UserItemErrorState) {}
+          if (state is UsersInitial) {
+            //UsersInitialWidget
+            state.navigate();
+          }
         },
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: buildBodyText(state),
-          );
+          return buildScaffold(state);
         },
       ),
+    );
+  }
+
+  Scaffold buildScaffold(UsersState state) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: buildBodyText(state),
     );
   }
 
@@ -39,7 +47,20 @@ class UsersView extends StatelessWidget {
     } else if (state is UserLoadingState) {
       return const Center(child: CircularProgressIndicator());
     } else if (state is UsersListItemState) {
-      return state.buildWidget();
+      return NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification notification) {
+            if (notification.metrics.pixels ==
+                notification.metrics.maxScrollExtent) {
+              //context.read
+              final _context = notification.context;
+              if (_context != null) {
+                _context.read<UsersCubit>().fecthUserItemPaging();
+              }
+              //notification.context!.read<UsersCubit>().fecthUserItemPaging();
+            }
+            return true;
+          },
+          child: state.buildWidget());
     }
 
     throw WidgetNotFoundException<UsersView>();
