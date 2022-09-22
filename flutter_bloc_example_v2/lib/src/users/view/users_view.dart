@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_example_v2/core/constants/project_constant.dart';
+import 'package:flutter_bloc_example_v2/core/exception/widget_not_found_exception.dart';
 import 'package:flutter_bloc_example_v2/core/service/user_service.dart';
 import 'package:flutter_bloc_example_v2/src/users/view_model/cubit/users_cubit_state.dart';
 
@@ -29,13 +30,13 @@ class UsersView extends StatelessWidget {
 
   Widget buildBodyText(UsersState state) {
     if (state is UsersInitial) {
-      return Text("data");
+      return state.buildWidget();
     } else if (state is UserLoadingState) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else if (state is UsersListItemState) {
       return Text(state.items.length.toString());
     }
 
-    return Container();
+    throw WidgetNotFoundException<UsersView>();
   }
 }
