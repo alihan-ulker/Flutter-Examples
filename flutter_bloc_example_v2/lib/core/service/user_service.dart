@@ -19,8 +19,9 @@ class UserService extends IUserService {
     final reqResModel = response.data;
 
     if (reqResModel != null) {
-      if (reqResModel.data != null) {
-        return reqResModel.data!;
+      final dataList = reqResModel.data;
+      if (dataList != null) {
+        return dataList;
       }
     }
 
