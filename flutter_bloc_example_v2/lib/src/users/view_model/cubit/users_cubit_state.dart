@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_example_v2/core/model/regres_model.dart';
 import 'package:flutter_bloc_example_v2/core/service/iuser_service.dart';
@@ -21,11 +20,7 @@ class UsersCubit extends Cubit<UsersState> {
   }
 }
 
-abstract class UsersState {
-  Widget buildWidget() {
-    return const SizedBox();
-  }
-}
+abstract class UsersState {}
 
 class UsersInitial extends UsersState {}
 
