@@ -6,7 +6,10 @@ import 'package:flutter_bloc_example_v2/core/service/user_service.dart';
 import 'package:flutter_bloc_example_v2/src/users/view_model/cubit/users_cubit_state.dart';
 
 class UsersView extends StatelessWidget {
-  const UsersView({Key? key}) : super(key: key);
+  UsersView({Key? key}) : super(key: key);
+
+  final userCubit =
+      UsersCubit(UserService(ProjectConstants.instance.networkManager));
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class UsersView extends StatelessWidget {
     if (state is UsersInitial) {
       return state.buildWidget();
     } else if (state is UserLoadingState) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     } else if (state is UsersListItemState) {
       return Text(state.items.length.toString());
     }

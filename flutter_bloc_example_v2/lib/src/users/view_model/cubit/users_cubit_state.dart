@@ -7,6 +7,7 @@ class UsersCubit extends Cubit<UsersState> {
   final IUserService userService;
   UsersCubit(this.userService) : super(UsersInitial()) {
     pageNumber = 1;
+    fecthUserItem();
   }
   late int pageNumber = 1;
   Future<void> fecthUserItem() async {
