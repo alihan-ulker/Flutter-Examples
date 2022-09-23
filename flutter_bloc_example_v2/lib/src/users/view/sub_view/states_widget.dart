@@ -12,18 +12,20 @@ extension UsersInitialWidget on UsersInitial {
 extension UsersListItemWidget on UsersListItemState {
   void _navigate() {}
   Widget buildWidget() {
-    return ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(items[index].avatar ??
-                    ApplicationConstants.DEFAULT_IMAGE_URL),
+    return Scrollbar(
+      child: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(items[index].avatar ??
+                      ApplicationConstants.DEFAULT_IMAGE_URL),
+                ),
+                title: Text(items[index].email ?? ""),
               ),
-              title: Text(items[index].email ?? ""),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

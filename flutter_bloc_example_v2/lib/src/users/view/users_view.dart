@@ -27,15 +27,25 @@ class UsersView extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return buildScaffold(state);
+          return buildScaffold(state, context);
         },
       ),
     );
   }
 
-  Scaffold buildScaffold(UsersState state) {
+  Scaffold buildScaffold(UsersState state, BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: context.watch<UsersCubit>().isPagingLoading
+              ? CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).scaffoldBackgroundColor),
+                )
+              : const Text("data"),
+        ),
+      ),
       body: buildBodyText(state),
     );
   }
@@ -63,6 +73,6 @@ class UsersView extends StatelessWidget {
           child: state.buildWidget());
     }
 
-    throw WidgetNotFoundException<UsersView>();
+    throw WidgetNotFoundException<UsersView, UsersState>(state);
   }
 }
