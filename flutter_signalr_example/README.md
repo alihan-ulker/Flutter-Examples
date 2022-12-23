@@ -1,6 +1,11 @@
 # flutter_signalr_example
 
-A new Flutter project.
+A sample Flutter application written to instantly transfer the Live Notification data received
+from websocket with Signalr to the ui side by broadcasting with Stream.
+
+### provider: ^6.0.5 - https://pub.dev/packages/provider
+### signalr_netcore: ^1.3.3 - https://pub.dev/packages/signalr_netcore
+### logging: ^1.1.0 - https://pub.dev/packages/logging
 
 ## Getting Started
 
