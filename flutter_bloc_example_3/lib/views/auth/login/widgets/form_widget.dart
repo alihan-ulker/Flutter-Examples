@@ -14,9 +14,12 @@ class FormWidget extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          UsernameTextfield(),
-          PasswordTextfiled(),
-          LoginButton(),
+          const UsernameTextfield(),
+          const PasswordTextfiled(),
+          const SizedBox(height: 15),
+          LoginButton(
+            formKey: _formKey,
+          ),
         ],
       ),
     );
