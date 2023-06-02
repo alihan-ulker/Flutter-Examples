@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_example_3/views/auth/login/widgets/login_button.dart';
-import 'package:flutter_bloc_example_3/views/auth/login/widgets/password_textfiled.dart';
-import 'package:flutter_bloc_example_3/views/auth/login/widgets/username_textfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_example_3/blocs/auth/login/login_bloc.dart';
+import 'package:flutter_bloc_example_3/blocs/auth/login/login_state.dart';
+import 'package:flutter_bloc_example_3/repository/auth/login/login_repository.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-
-  final GlobalKey _formKey = GlobalKey();
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: const Column(
-          children: [
-            UsernameTextfield(),
-            PasswordTextfiled(),
-            LoginButton(),
-          ],
+      body: BlocProvider(
+        create: (context) => LoginBloc(
+          authRepo: context.read<LoginRepository>(),
+        ),
+        child: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {},
+          listenWhen: (previous, current) =>
+              previous.formStatus != current.formStatus,
+          child: Center(
+            child: Column(
+              children: [
+                Image.asset("assets/yoga_girl.png"),
+              ],
+            ),
+          ),
         ),
       ),
     );

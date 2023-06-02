@@ -5,6 +5,11 @@ class UsernameTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return TextFormField(
+      decoration: const InputDecoration(
+        icon: Icon(Icons.person),
+        hintText: "Username",
+      ),
+    );
   }
 }
