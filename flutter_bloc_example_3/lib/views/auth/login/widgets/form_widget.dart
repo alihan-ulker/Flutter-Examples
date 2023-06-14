@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_example_3/views/auth/login/widgets/login_button.dart';
 import 'package:flutter_bloc_example_3/views/auth/login/widgets/password_textfiled.dart';
-import 'package:flutter_bloc_example_3/views/auth/login/widgets/username_textfield.dart';
+import 'package:flutter_bloc_example_3/views/auth/login/widgets/email_field.dart';
 
 class FormWidget extends StatelessWidget {
-  FormWidget({Key? key}) : super(key: key);
+  FormWidget({Key? key, required this.isLogin}) : super(key: key);
 
-  final GlobalKey _formKey = GlobalKey();
+  final GlobalKey _formKey = GlobalKey<FormState>();
+  final bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,9 @@ class FormWidget extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          const UsernameTextfield(),
+          EmailField(
+            isLogin: isLogin,
+          ),
           const PasswordTextfiled(),
           const SizedBox(height: 15),
           LoginButton(

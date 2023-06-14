@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: ((context, state) {
-        return state.formStatus is FormSubmitting
+        return state.appStatus is FormSubmitting
             ? const Center(
                 child: CircularProgressIndicator(),
               )

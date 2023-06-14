@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_example_3/blocs/bloc_status.dart';
 
-class LoginState extends Equatable {
+class RegisterState extends Equatable {
   final String email;
   bool get isValidEmail => email.length > 3;
 
@@ -10,18 +10,18 @@ class LoginState extends Equatable {
 
   final AppSubmissionStatus appStatus;
 
-  const LoginState({
+  const RegisterState({
     this.email = '',
     this.password = '',
     this.appStatus = const InitialStatus(),
   });
 
-  LoginState copyWith({
+  RegisterState copyWith({
     String? email,
     String? password,
     AppSubmissionStatus? appStatus,
   }) {
-    return LoginState(
+    return RegisterState(
       email: email ?? this.email,
       password: password ?? this.password,
       appStatus: appStatus ?? this.appStatus,
